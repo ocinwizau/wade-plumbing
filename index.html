@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,284 +7,52 @@
     <title>Hervey Bay Plumbing | Wade — AI Assistant</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
-            --primary: #0066CC;
-            --primary-dark: #0052A3;
-            --bg: #f5f7fa;
-            --white: #ffffff;
-            --text: #333333;
-            --text-light: #666666;
-            --border: #e0e0e0;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
+            --primary: #0066CC; --primary-dark: #0052A3;
+            --bg: #f5f7fa; --white: #ffffff; --text: #333333;
+            --text-light: #666666; --border: #e0e0e0;
+            --success: #28a745; --danger: #dc3545;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .header {
-            background: var(--primary);
-            color: var(--white);
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .header-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            position: relative;
-        }
-
-        .online-dot {
-            position: absolute;
-            bottom: 1px;
-            right: 1px;
-            width: 11px;
-            height: 11px;
-            background: #4ade80;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-        }
-        
-        .header-text h1 {
-            font-size: 18px;
-            font-weight: 700;
-        }
-        
-        .header-text p {
-            font-size: 12px;
-            opacity: 0.85;
-        }
-
-        .header-badge {
-            margin-left: auto;
-            font-size: 9px;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 3px 8px;
-            border-radius: 10px;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
-        }
-        
-        .chat-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        .message {
-            max-width: 80%;
-            padding: 14px 18px;
-            border-radius: 18px;
-            line-height: 1.55;
-            font-size: 14px;
-        }
-        
-        .message.bot {
-            background: var(--white);
-            color: var(--text);
-            border: 1px solid var(--border);
-            border-radius: 18px 18px 18px 4px;
-            align-self: flex-start;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        .message.user {
-            background: var(--primary);
-            color: var(--white);
-            align-self: flex-end;
-            border-radius: 18px 18px 4px 18px;
-        }
-        
-        .message .name {
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .quick-reply {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--primary);
-            font-weight: 500;
-        }
-        
-        .quick-reply:hover {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-        }
-        
-        .emergency-banner {
-            background: var(--danger);
-            color: var(--white);
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin: 8px 0;
-            font-weight: 600;
-        }
-        
-        .price-tag {
-            display: inline-block;
-            background: #e8f5e9;
-            color: var(--success);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            margin: 4px 0;
-        }
-        
-        .input-area {
-            background: var(--white);
-            padding: 14px 20px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-        }
-        
-        .input-area input {
-            flex: 1;
-            padding: 12px 18px;
-            border: 1px solid var(--border);
-            border-radius: 25px;
-            font-size: 14px;
-            outline: none;
-        }
-        
-        .input-area input:focus {
-            border-color: var(--primary);
-        }
-
-        .input-area input::placeholder {
-            color: #aaa;
-        }
-        
-        .input-area button {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .input-area button:hover {
-            background: var(--primary-dark);
-        }
-        
-        .typing {
-            display: flex;
-            gap: 4px;
-            padding: 14px 18px;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 18px 18px 18px 4px;
-            width: fit-content;
-            align-items: center;
-        }
-        
-        .typing span {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: bounce 1.2s infinite;
-        }
-        
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); height: 100vh; display: flex; flex-direction: column; }
+        .header { background: var(--primary); color: var(--white); padding: 16px 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .header-icon { width: 44px; height: 44px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; position: relative; }
+        .online-dot { position: absolute; bottom: 1px; right: 1px; width: 11px; height: 11px; background: #4ade80; border-radius: 50%; border: 2px solid var(--primary); }
+        .header-text h1 { font-size: 18px; font-weight: 700; }
+        .header-text p { font-size: 12px; opacity: 0.85; }
+        .header-badge { margin-left: auto; font-size: 9px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 3px 8px; border-radius: 10px; letter-spacing: 0.05em; white-space: nowrap; }
+        .chat-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+        .message { max-width: 80%; padding: 14px 18px; border-radius: 18px; line-height: 1.55; font-size: 14px; }
+        .message.bot { background: var(--white); color: var(--text); border: 1px solid var(--border); border-radius: 18px 18px 18px 4px; align-self: flex-start; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .message.user { background: var(--primary); color: var(--white); align-self: flex-end; border-radius: 18px 18px 4px 18px; }
+        .message .name { font-size: 11px; font-weight: 700; margin-bottom: 5px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; }
+        .quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .quick-reply { background: var(--bg); border: 1px solid var(--border); padding: 8px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.2s; color: var(--primary); font-weight: 500; }
+        .quick-reply:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+        .emergency-banner { background: var(--danger); color: var(--white); padding: 12px 16px; border-radius: 8px; margin: 8px 0; font-weight: 600; }
+        .price-tag { display: inline-block; background: #e8f5e9; color: var(--success); padding: 4px 10px; border-radius: 12px; font-size: 13px; font-weight: 600; margin: 4px 0; }
+        .input-area { background: var(--white); padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 12px; }
+        .input-area input { flex: 1; padding: 12px 18px; border: 1px solid var(--border); border-radius: 25px; font-size: 14px; outline: none; }
+        .input-area input:focus { border-color: var(--primary); }
+        .input-area input::placeholder { color: #aaa; }
+        .input-area button { background: var(--primary); color: var(--white); border: none; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: background 0.2s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .input-area button:hover { background: var(--primary-dark); }
+        .typing { display: flex; gap: 4px; padding: 14px 18px; background: var(--white); border: 1px solid var(--border); border-radius: 18px 18px 18px 4px; width: fit-content; align-items: center; }
+        .typing span { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: bounce 1.2s infinite; }
         .typing span:nth-child(2) { animation-delay: 0.2s; }
         .typing span:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-            40% { transform: scale(1); opacity: 1; }
-        }
-
-        .footer {
-            background: var(--white);
-            text-align: center;
-            padding: 7px;
-            font-size: 10px;
-            color: #aaa;
-            border-top: 1px solid var(--border);
-        }
-
-        .float-call {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 4px 16px rgba(0,102,204,0.4);
-            cursor: pointer;
-            text-decoration: none;
-            z-index: 100;
-            transition: transform 0.2s;
-        }
-
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+        .footer { background: var(--white); text-align: center; padding: 7px; font-size: 10px; color: #aaa; border-top: 1px solid var(--border); }
+        .float-call { position: fixed; bottom: 80px; right: 20px; width: 48px; height: 48px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 16px rgba(0,102,204,0.4); cursor: pointer; text-decoration: none; z-index: 100; transition: transform 0.2s; }
         .float-call:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="header-icon">🔧<div class="online-dot"></div></div>
-        <div class="header-text">
-            <h1>Wade</h1>
-            <p>Hervey Bay Plumbing · Fraser Coast</p>
-        </div>
+        <div class="header-text"><h1>Wade</h1><p>Hervey Bay Plumbing · Fraser Coast</p></div>
         <div class="header-badge">AI ASSISTANT</div>
     </div>
-    
     <div class="chat-container" id="chat"></div>
-    
     <div class="input-area">
         <input type="text" id="userInput" placeholder="Ask Wade anything..." onkeypress="handleKeyPress(event)">
         <button onclick="sendMessage()">
@@ -291,68 +60,84 @@
         </button>
     </div>
     <div class="footer">Powered by Groq AI · Hervey Bay Plumbing</div>
-
     <a href="tel:0741281588" class="float-call" title="Call Hervey Bay Plumbing">📞</a>
 
     <script>
         const SYSTEM_PROMPT = `You are Wade, the friendly AI assistant for Hervey Bay Plumbing — a local plumbing company serving the Fraser Coast since 1988.
-
-YOUR PERSONALITY:
-- Casual, warm and helpful — like a friendly local tradie
-- Down to earth, plain English — no jargon
-- Keep replies SHORT — 2 to 3 sentences max
-- Always offer a next step (booking, calling, pricing)
-- Occasional tradie emojis 🔧🚿💧
-
-BUSINESS DETAILS:
-- Name: Hervey Bay Plumbing
-- Phone: 07 4128 1588
-- Hours: Mon-Fri 7am-5pm · Sat 8am-12pm · 24/7 Emergency
-- Licensed, insured, 36+ years in business
-- Services: Blocked drains, hot water systems, gas fitting, leaks, burst pipes, emergency repairs
-
-PRICING GUIDE (estimates only):
-- Callout fee: $120-180
-- Blocked drains: $150-300
-- Hot water systems: $200-400
-- Gas repairs: $150-350
-- Hourly rate: $90-120/hr
-
-EMERGENCY: If someone mentions burst pipe, flooding, gas leak — tell them to call 07 4128 1588 immediately.
-
-RULES:
-- Never give exact prices — always say "roughly" or "around"
-- If unsure, say "give us a ring on 07 4128 1588"
-- Only discuss plumbing topics`;
+PERSONALITY: Casual, warm, helpful — friendly local tradie. Plain English. 2-3 sentences max. Tradie emojis 🔧🚿💧
+BUSINESS: Phone 07 4128 1588. Hours Mon-Fri 7am-5pm, Sat 8am-12pm, 24/7 Emergency. Licensed, insured, 36+ years.
+SERVICES: Blocked drains, hot water systems, gas fitting, leaks, burst pipes, emergency repairs.
+PRICING (estimates): Callout $120-180, Blocked drains $150-300, Hot water $200-400, Gas repairs $150-350, Hourly $90-120/hr.
+EMERGENCY: Burst pipe, flooding, gas leak — call 07 4128 1588 immediately.
+RULES: Never exact prices, always say roughly. If unsure: ring 07 4128 1588. Plumbing topics only.`;
 
         const chat = document.getElementById('chat');
         const userInput = document.getElementById('userInput');
-        
-        let state = {
-            step: 'greeting',
-            name: '', address: '', phone: '',
-            whenNeeded: '', problem: '', jobType: '', isEmergency: false
-        };
-        
-        const pricing = {
-            'callout': '$120-180', 'blocked-drain': '$150-300',
-            'hot-water': '$200-400', 'gas-repair': '$150-350', 'hourly': '$90-120/hr'
-        };
-        
-        const jobTypes = {
-            'blocked drain': 'blocked-drain', 'blocked drains': 'blocked-drain',
-            'drain': 'blocked-drain', 'drains': 'blocked-drain',
-            'hot water': 'hot-water', 'no hot water': 'hot-water',
-            'hot water system': 'hot-water', 'gas': 'gas-repair',
-            'gas leak': 'gas-repair', 'gas fitting': 'gas-repair',
-            'leaking': 'callout', 'leak': 'callout', 'leaking tap': 'callout',
-            'dripping tap': 'callout', 'tap': 'callout', 'toilet': 'callout',
-            'burst pipe': 'emergency', 'flooding': 'emergency', 'flood': 'emergency',
-            'no water': 'callout', 'low pressure': 'callout'
-        };
-        
-        const emergencyKeywords = ['burst', 'flood', 'flooding', 'gas leak', 'no water', 'emergency'];
-        
+
+        // Lead capture state
+        let leadStep = null;
+        let leadData = {};
+
+        async function sendLead() {
+            try {
+                await fetch('https://formspree.io/f/xlgaarva', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        source: 'Wade — Hervey Bay Plumbing Chatbot',
+                        type: leadData.type,
+                        name: leadData.name,
+                        phone: leadData.phone,
+                        address: leadData.address,
+                        when: leadData.when,
+                        issue: leadData.issue || 'Not specified'
+                    })
+                });
+                addMessage(`All sorted ${leadData.name}! 🎉\n\nWe'll give you a call to confirm your booking. In the meantime if it's urgent just ring us on 07 4128 1588. 🔧`, false);
+            } catch(err) {
+                addMessage("Cheers! We'll be in touch shortly. If it's urgent ring 07 4128 1588 🔧", false);
+            }
+            leadStep = null;
+            leadData = {};
+        }
+
+        function handleLeadFlow(text) {
+            if (leadStep === 'name') {
+                leadData.name = text;
+                addMessage(`Cheers ${text}! 📋\n\nWhat's your address so we know where to come?`, false);
+                leadStep = 'address'; return true;
+            }
+            if (leadStep === 'address') {
+                leadData.address = text;
+                addMessage("Got it! 📍\n\nAnd your best phone number?", false);
+                leadStep = 'phone'; return true;
+            }
+            if (leadStep === 'phone') {
+                leadData.phone = text;
+                addMessage("Beauty! 📱\n\nWhen do you need us?", false);
+                // Add quick replies
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = 'message bot';
+                    div.innerHTML = '<div class="name">🔧 Wade</div><div class="quick-replies"><span class="quick-reply" onclick="handleQuickReply(\'Today\')">Today</span><span class="quick-reply" onclick="handleQuickReply(\'Tomorrow\')">Tomorrow</span><span class="quick-reply" onclick="handleQuickReply(\'This week\')">This week</span><span class="quick-reply" onclick="handleQuickReply(\'Flexible\')">Flexible</span></div>';
+                    chat.appendChild(div); chat.scrollTop = chat.scrollHeight;
+                }, 100);
+                leadStep = 'when'; return true;
+            }
+            if (leadStep === 'when') {
+                leadData.when = text;
+                sendLead();
+                return true;
+            }
+            return false;
+        }
+
+        const emergencyKeywords = ['burst', 'flood', 'flooding', 'gas leak', 'emergency'];
+
+        function checkEmergency(text) {
+            return emergencyKeywords.some(k => text.toLowerCase().includes(k));
+        }
+
         function addMessage(text, isUser = false, quickReplies = null) {
             const div = document.createElement('div');
             div.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -361,144 +146,54 @@ RULES:
             content += text.replace(/\n/g, '<br>');
             if (quickReplies) {
                 content += `<div class="quick-replies">`;
-                quickReplies.forEach(r => {
-                    content += `<span class="quick-reply" onclick="handleQuickReply('${r}')">${r}</span>`;
-                });
+                quickReplies.forEach(r => { content += `<span class="quick-reply" onclick="handleQuickReply('${r}')">${r}</span>`; });
                 content += `</div>`;
             }
             div.innerHTML = content;
-            chat.appendChild(div);
-            chat.scrollTop = chat.scrollHeight;
+            chat.appendChild(div); chat.scrollTop = chat.scrollHeight;
         }
-        
+
         function showTyping() {
             const div = document.createElement('div');
             div.className = 'typing'; div.id = 'typing';
             div.innerHTML = '<span></span><span></span><span></span>';
             chat.appendChild(div); chat.scrollTop = chat.scrollHeight;
         }
-        
         function hideTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
         function handleQuickReply(text) { userInput.value = text; sendMessage(); }
         function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
-        
-        function detectJobType(text) {
-            text = text.toLowerCase();
-            for (const [key, value] of Object.entries(jobTypes)) {
-                if (text.includes(key)) return value;
-            }
-            return null;
-        }
-        
-        function checkEmergency(text) {
-            text = text.toLowerCase();
-            return emergencyKeywords.some(k => text.includes(k));
-        }
-        
-        function getPrice(jobType) { return pricing[jobType] || '$90-120/hr'; }
-        
-        async function sendMessage() {
-            const text = userInput.value.trim();
-            if (!text) return;
-            addMessage(text, true);
-            userInput.value = '';
 
-            // Emergency check first
-            if (checkEmergency(text)) {
-                addMessage("<div class='emergency-banner'>⚠️ Sounds like an emergency mate!</div>Call us right now on <b>07 4128 1588</b> — we're available 24/7 for urgent jobs. Don't wait! 🔧", false);
-                return;
-            }
-
-            showTyping();
-            try {
-                const res = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ messages: [{ role: 'system', content: SYSTEM_PROMPT }, { role: 'user', content: text }] })
-                });
-                const data = await res.json();
-                hideTyping();
-                const reply = data.reply || handleBotFallback(text);
-                if (reply) addMessage(reply, false);
-            } catch(err) {
-                hideTyping();
-                handleBotFallback(text, true);
-            }
-        }
-
-        function handleBotFallback(text, addMsg = false) {
-            const t = text.toLowerCase();
-            let reply = null;
-
-            if (t.includes('price') || t.includes('cost') || t.includes('how much') || t.includes('charge')) {
-                reply = "Rough guide — blocked drains around $150-300, hot water $200-400, callout fee $120-180 🔧 We'll give ya a proper quote once we take a look. Want to book a visit?";
-            } else if (t.includes('book') || t.includes('appoint') || t.includes('visit')) {
-                addMessage("No worries, let's get you booked in! What's your name, mate?", false);
-                state.step = 'collect_name';
-                return null;
-            } else if (t.includes('hour') || t.includes('open') || t.includes('available')) {
-                reply = "We're open Mon-Fri 7am-5pm and Sat 8am-12pm 🕐 And 24/7 for emergencies — just ring 07 4128 1588!";
-            } else if (t.includes('emergency') || t.includes('urgent')) {
-                reply = "<div class='emergency-banner'>📞 Call us NOW: 07 4128 1588</div>We're available around the clock for emergencies. Don't wait — give us a ring!";
-            } else if (t.includes('guarantee') || t.includes('warranty') || t.includes('licens')) {
-                reply = "Too right — we're fully licensed and insured, and all our work is guaranteed 💪 36+ years in the game, we don't cut corners.";
-            } else {
-                reply = "Hey! I'm Wade from Hervey Bay Plumbing 🔧 I can help with pricing, bookings, or any plumbing questions. What's going on?";
-            }
-
-            if (addMsg && reply) addMessage(reply, false);
-            return reply;
-        }
-        
-        // State-based booking flow
-        const origSend = sendMessage;
-        
-        // Override for booking flow
         async function sendMessage() {
             const text = userInput.value.trim();
             if (!text) return;
 
-            if (checkEmergency(text)) {
-                addMessage(text, true);
-                userInput.value = '';
+            if (checkEmergency(text) && !leadStep) {
+                addMessage(text, true); userInput.value = '';
                 addMessage("<div class='emergency-banner'>⚠️ Sounds like an emergency mate!</div>Call us right now on <b>07 4128 1588</b> — we're available 24/7. Don't wait! 🔧", false);
                 return;
             }
 
-            if (state.step === 'collect_name') {
+            // Handle lead flow
+            if (leadStep) {
                 addMessage(text, true); userInput.value = '';
-                state.name = text;
-                addMessage(`Cheers ${state.name}! 📋 What's your address so we know where to come?`, false);
-                state.step = 'collect_address'; return;
-            }
-            if (state.step === 'collect_address') {
-                addMessage(text, true); userInput.value = '';
-                state.address = text;
-                addMessage("Got it! 📍 And your best phone number?", false);
-                state.step = 'collect_phone'; return;
-            }
-            if (state.step === 'collect_phone') {
-                addMessage(text, true); userInput.value = '';
-                state.phone = text;
-                addMessage("Beauty! 📱 When do you need us?", false, ["Today", "Tomorrow", "This week", "Flexible"]);
-                state.step = 'collect_when'; return;
-            }
-            if (state.step === 'collect_when') {
-                addMessage(text, true); userInput.value = '';
-                state.whenNeeded = text;
-                const price = getPrice(state.jobType || 'callout');
-                addMessage(`All sorted! 🎉\n\n📋 <b>${state.name}</b>\n📍 ${state.address}\n📞 ${state.phone}\n🗓️ ${state.whenNeeded}\n💰 Est. ${price}\n\nWe'll give you a call to confirm. Anything else I can help with?`, false, ["No worries, thanks!", "What's the callout fee?", "Do you do free quotes?"]);
-                state.step = 'greeting'; return;
+                handleLeadFlow(text); return;
             }
 
-            addMessage(text, true);
-            userInput.value = '';
+            addMessage(text, true); userInput.value = '';
             const t = text.toLowerCase();
 
-            if (t.includes('book') || t.includes('appoint') || t.includes('visit') || t.includes('come out')) {
-                addMessage("No worries, let's get you sorted! 🔧 What's your name, mate?", false);
-                state.step = 'collect_name';
-                state.jobType = detectJobType(text) || 'callout';
+            if (t.includes('book') || t.includes('appoint') || t.includes('visit') || t.includes('come out') || t.includes('send someone')) {
+                leadData = { type: 'Job Booking', issue: text };
+                addMessage("No worries, let's get you sorted! 🔧\n\nWhat's your name, mate?", false);
+                leadStep = 'name'; return;
+            }
+
+            if (t.includes('price') || t.includes('cost') || t.includes('how much')) {
+                addMessage("Rough guide — blocked drains around $150-300, hot water $200-400, callout fee $120-180 🔧\n\nWe'll give ya a proper quote once we take a look. Want to book a visit?", false);
+                return;
+            }
+            if (t.includes('hour') || t.includes('open')) {
+                addMessage("We're open Mon-Fri 7am-5pm and Sat 8am-12pm 🕐 And 24/7 for emergencies — just ring 07 4128 1588!", false);
                 return;
             }
 
@@ -511,22 +206,19 @@ RULES:
                 });
                 const data = await res.json();
                 hideTyping();
-                addMessage(data.reply || handleBotFallback(text), false);
+                addMessage(data.reply || "Hey! I'm Wade from Hervey Bay Plumbing 🔧 I can help with pricing, bookings, or plumbing questions. What's going on?", false);
             } catch(err) {
                 hideTyping();
-                handleBotFallback(text, true);
+                addMessage("Hey! I'm Wade from Hervey Bay Plumbing 🔧 What can I help you with today?", false);
             }
         }
-        
-        function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
-        
-        // Welcome message
+
         window.onload = () => {
             setTimeout(() => {
                 addMessage(
                     "G'day! I'm Wade from Hervey Bay Plumbing 🔧\n\nWe've been fixing Fraser Coast pipes since 1988. What can I help you with today?",
                     false,
-                    ["Blocked drain 🚿", "Hot water issue 🚰", "Gas problem 🔥", "Leaking tap 💧", "Emergency! 🚨"]
+                    ["Blocked drain 🚿", "Hot water issue 🚰", "Gas problem 🔥", "Leaking tap 💧", "Book a visit 📅"]
                 );
             }, 400);
         };
